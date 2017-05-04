@@ -1,0 +1,22 @@
+import org.apache.commons.httpclient.*;
+import org.apache.commons.httpclient.methods.*;
+import org.apache.commons.httpclient.params.HttpMethodParams;
+
+import java.io.*;
+
+public class RequestBinTutorial {
+  public static void main(String[] args) {
+    HttpClient client = new HttpClient();
+    GetMethod method = new GetMethod("http://requestb.in/1au85tr1");
+    try {
+      int statusCode = client.executeMethod(method);
+      byte[] responseBody = method.getResponseBody();
+      System.out.println(new String(responseBody));
+    } catch (Exception e) {
+      System.err.println("Fatal error: " + e.getMessage());
+      e.printStackTrace();
+    } finally {
+      method.releaseConnection();
+    }
+  }
+}
